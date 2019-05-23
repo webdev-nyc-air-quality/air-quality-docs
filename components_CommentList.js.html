@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: components/Home.js</title>
+    <title>JSDoc: Source: components/CommentList.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: components/Home.js</h1>
+    <h1 class="page-title">Source: components/CommentList.js</h1>
 
     
 
@@ -27,22 +27,85 @@
     <section>
         <article>
             <pre class="prettyprint source linenums"><code>import React from 'react'
-import { Link } from 'gatsby'
+import { Card, Col, Row } from 'react-bootstrap'
+import userAvatar from '../../img/user-avatar.png'
 
 /**
-* React component to signal the success of the login
-*/
-const Home = () => (
-  &lt;div>
-    &lt;h1>Home&lt;/h1>
-    &lt;p>
-      &lt;span id='greeting'>You are now logged in!&lt;/span>&amp;nbsp;
-      &lt;Link to='/app/profile'>View profile&lt;/Link>
-    &lt;/p>
-  &lt;/div>
+ * A list of comments 
+ */
+const comments = [
+  {
+    displayName: 'Sarah R.',
+    date: '2019-05-23',
+    text:
+      "Couldn't understand what the colors meant. Could someone explain the legend...",
+  },
+  {
+    displayName: 'Tom C.',
+    date: '2019-05-22',
+    text: 'Woah, I never heard of some of these cultural sites.',
+  },
+  {
+    displayName: 'Jenny L.',
+    date: '2019-05-21',
+    text: 'I wonder why the Lower East Side has so few cultural sites',
+  },
+]
+/**
+ * Reatct component that returrn a list of recents comments
+ * @method Discussion
+ * @returns {list} - A list of comments
+ */
+const Discussion = () => (
+  &lt;>
+    {comments.map(({ displayName, date, text }) => (
+      &lt;Card style={styles.card}>
+        &lt;Card.Title style={styles.cardTitle}>
+          &lt;Row>
+            &lt;Col xs={3}>
+              &lt;span>{displayName}&lt;/span>
+            &lt;/Col>
+            &lt;Col>
+              &lt;span style={styles.date} className='text-muted'>
+                {date}
+              &lt;/span>
+            &lt;/Col>
+          &lt;/Row>
+        &lt;/Card.Title>
+        &lt;Card.Text>
+          &lt;Row className='no-gutters'>
+            &lt;Col xs={2}>
+              &lt;img
+                src={userAvatar}
+                alt='user-avatar'
+                style={styles.userAvatar}
+                className='mx-auto d-block'
+              />
+            &lt;/Col>
+            &lt;Col>{text}&lt;/Col>
+          &lt;/Row>
+        &lt;/Card.Text>
+      &lt;/Card>
+    ))}
+  &lt;/>
 )
 
-export default Home
+const styles = {
+  card: {
+    padding: '0.5rem 0',
+  },
+  cardTitle: {
+    margin: 0,
+  },
+  date: {
+    fontSize: '1rem',
+  },
+  userAvatar: {
+    width: '3rem',
+  },
+}
+
+export default Discussion
 </code></pre>
         </article>
     </section>
